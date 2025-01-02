@@ -149,6 +149,10 @@ export const App: React.FC = () => {
     }
   }, [error]);
 
+  useEffect(() => {
+    inputRef.current?.focus();
+  }, []);
+
   if (!USER_ID) {
     return <UserWarning />;
   }
@@ -184,6 +188,7 @@ export const App: React.FC = () => {
               placeholder="What needs to be done?"
               disabled={isLoading}
               ref={inputRef}
+              autoFocus
             />
           </form>
         </header>
@@ -201,21 +206,30 @@ export const App: React.FC = () => {
           onDelete={handleDelete}
         />
 
-        <Footer
-          todos={todos}
-          filterOption={filterOption}
-          setFilterOption={setFilterOption}
-          handleClearCompleted={handleClearCompleted}
-          isLoading={false}
-        />
+        {todos.length > 0 && (
+          <Footer
+            todos={todos}
+            filterOption={filterOption}
+            setFilterOption={setFilterOption}
+            handleClearCompleted={handleClearCompleted}
+            isLoading={false}
+          />
+        )}
       </div>
 
-      {error && (
-        <div className="notification is-danger">
-          <button onClick={() => setError('')} className="delete" />
-          {error}
-        </div>
-      )}
+      <div
+        data-cy="ErrorNotification"
+        className={
+          error ? 'notification is-danger' : 'notification is-danger hidden'
+        }
+      >
+        <button
+          className="delete"
+          onClick={() => setError('')}
+          data-cy="HideErrorButton"
+        />
+        {error}
+      </div>
     </div>
   );
 };
