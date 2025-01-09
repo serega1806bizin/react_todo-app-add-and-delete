@@ -24,6 +24,7 @@ export const Header: React.FC<Props> = ({
 
       if (title.trim() === '') {
         onEmptyTitleError();
+
         return;
       }
 
@@ -31,7 +32,7 @@ export const Header: React.FC<Props> = ({
         await onAddTodo?.(title.trim());
         setTitle('');
       } catch (error) {
-        console.error('Failed to add a todo:', error);
+        // console.error('Failed to add a todo:', error);
       }
     },
     [title, onAddTodo, onEmptyTitleError],
