@@ -124,6 +124,15 @@ export const App: React.FC = () => {
     return <UserWarning />;
   }
 
+  // eslint-disable-next-line react-hooks/rules-of-hooks
+  const toggleTodoCompletion = useCallback((id: number) => {
+    setTodos(prevTodos =>
+      prevTodos.map(todo =>
+        todo.id === id ? { ...todo, completed: !todo.completed } : todo,
+      ),
+    );
+  }, []);
+
   return (
     <div className="todoapp">
       <h1 className="todoapp__title">todos</h1>
