@@ -6,10 +6,7 @@ type Props = {
   clearErrorMessage: () => void;
 };
 
-export const ErrorNotification: React.FC<Props> = ({
-  errorMessage,
-  clearErrorMessage,
-}) => (
+export const Error: React.FC<Props> = ({ errorMessage, clearErrorMessage }) => (
   <div
     data-cy="ErrorNotification"
     className={classNames(

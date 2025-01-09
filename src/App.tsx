@@ -4,7 +4,7 @@ import { USER_ID, addTodo, deleteTodo, getTodos } from './api/todos';
 import { Todos } from './components/Todos';
 import { Todo } from './types/Todo';
 import { ErrorMessages } from './types/Error';
-import { ErrorNotification } from './components/Error';
+import { Error } from './components/Error';
 
 export const App: React.FC = () => {
   const [todos, setTodos] = useState<Todo[]>([]);
@@ -124,15 +124,6 @@ export const App: React.FC = () => {
     return <UserWarning />;
   }
 
-  // eslint-disable-next-line react-hooks/rules-of-hooks
-  const toggleTodoCompletion = useCallback((id: number) => {
-    setTodos(prevTodos =>
-      prevTodos.map(todo =>
-        todo.id === id ? { ...todo, completed: !todo.completed } : todo,
-      ),
-    );
-  }, []);
-
   return (
     <div className="todoapp">
       <h1 className="todoapp__title">todos</h1>
@@ -149,7 +140,7 @@ export const App: React.FC = () => {
         shouldFocus={shouldFocus}
       />
 
-      <ErrorNotification
+      <Error
         errorMessage={errorMessage}
         clearErrorMessage={() => setErrorMessage(null)}
       />
